@@ -7,4 +7,6 @@ $creds = Get-Credential -UserName "admin" -Message "Enter the HDInsight login"
 
 $resp = Invoke-WebRequest -Uri "https://$clustername.azurehdinsight.net/api/v1/clusters/$clustername" `
     -Credential $creds
-$resp.Content
+
+$respObj = ConvertFrom-Json $resp.Content
+$respObj.Clusters.health_report
